@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- app_links v7 requires Flutter's built-in deep-link handling to be off
+	     (Flutter 3.24+) so the plugin receives openURLContexts: /
+	     continueUserActivity: from the SceneDelegate. Required for the
+	     tamen://trip/<token> deep link and the Clerk tamen://oauth-callback. -->
+	<key>FlutterDeepLinkingEnabled</key>
+	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -65,6 +71,27 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<!-- Location (geolocator + permission_handler). Requested at runtime,
+	     only while a trip is active. Calm copy per designsystem §37. -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is shared only for the active trip so your trusted contacts can know you are okay. You can stop sharing at any time.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Background location is used only while a trip is active to update your trip status. Sharing ends automatically when the trip ends.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Background location is used only while a trip is active to update your trip status. Sharing ends automatically when the trip ends.</string>
+	<!-- Custom URL scheme: tamen://trip/<token>, tamen://oauth-callback
+	     (app_links + go_router + Clerk). -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>app.tamen</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tamen</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>
