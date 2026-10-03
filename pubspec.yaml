@@ -46,6 +46,7 @@ dependencies:
   intl: ^0.20.3
   flutter_secure_storage: ^11.2.0
   easy_localization: ^3.0.8
+  flutter_native_splash: ^2.4.8
 
 dev_dependencies:
   flutter_test:
@@ -57,11 +58,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
+  flutter_launcher_icons: ^0.14.4
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -71,6 +68,29 @@ flutter:
 
   assets:
     - assets/translations/
+    - assets/images/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/app_icon_foreground.png"
+  background_color: "#FFFFFF"
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "assets/images/splash_image.png"
+  color_dark: "#071724"
+  image_dark: "assets/images/splash_image_dark.png"
+  android_12:
+    color: "#FFFFFF"
+    image: "assets/images/splash_image.png"
+    color_dark: "#071724"
+    image_dark: "assets/images/splash_image_dark.png"
+  ios: true
+  android: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
