@@ -1,0 +1,43 @@
+{
+  // F5 runs `flutter run` with --dart-define keys (never hardcoded/committed).
+  // See docs/supabase-clerk-setup.md §3.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Tamen (debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": [
+        "--dart-define=SUPABASE_URL=${input:supabaseUrl}",
+        "--dart-define=SUPABASE_KEY=${input:supabaseKey}",
+        "--dart-define=CLERK_PUBLISHABLE_KEY=${input:clerkKey}"
+      ]
+    },
+    {
+      "name": "Tamen (debug, offline UI)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "supabaseUrl",
+      "type": "promptString",
+      "description": "Supabase URL (https://<ref>.supabase.co)"
+    },
+    {
+      "id": "supabaseKey",
+      "type": "promptString",
+      "description": "Supabase publishable key (sb_publishable_…)",
+      "password": true
+    },
+    {
+      "id": "clerkKey",
+      "type": "promptString",
+      "description": "Clerk publishable key (pk_test_… / pk_live_…)",
+      "password": true
+    }
+  ]
+}
