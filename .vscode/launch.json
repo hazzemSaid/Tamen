@@ -1,6 +1,6 @@
 {
   // F5 runs `flutter run` with --dart-define keys (never hardcoded/committed).
-  // See docs/supabase-clerk-setup.md §3.
+  // Supabase Auth is used directly via supabase_flutter (no third-party identity provider).
   "version": "0.2.0",
   "configurations": [
     {
@@ -10,8 +10,7 @@
       "program": "lib/main.dart",
       "args": [
         "--dart-define=SUPABASE_URL=${input:supabaseUrl}",
-        "--dart-define=SUPABASE_KEY=${input:supabaseKey}",
-        "--dart-define=CLERK_PUBLISHABLE_KEY=${input:clerkKey}"
+        "--dart-define=SUPABASE_KEY=${input:supabaseKey}"
       ]
     },
     {
@@ -31,12 +30,6 @@
       "id": "supabaseKey",
       "type": "promptString",
       "description": "Supabase publishable key (sb_publishable_…)",
-      "password": true
-    },
-    {
-      "id": "clerkKey",
-      "type": "promptString",
-      "description": "Clerk publishable key (pk_test_… / pk_live_…)",
       "password": true
     }
   ]

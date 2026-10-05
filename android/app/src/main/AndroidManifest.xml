@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Network (Supabase backend + Clerk identity). -->
+    <!-- Network (Supabase backend + Supabase Auth identity). -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- Location (geolocator + permission_handler). Requested at runtime,
          foreground first, background separately, only while a trip is active. -->
@@ -44,14 +44,19 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <!-- Deep links: tamen://trip/<opaque-token>, tamen://oauth-callback
-                 (app_links + go_router + Clerk). https applinks deferred until
-                 the production domain + assetlinks.json exist. -->
+            <!-- Supabase Auth callback: tamen://oauth-callback. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="tamen"/>
+                <data android:scheme="tamen" android:host="oauth-callback"/>
+            </intent-filter>
+            <!-- Trip links: tamen://trip/<opaque-token>. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="tamen" android:host="trip"/>
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
