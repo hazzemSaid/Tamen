@@ -3,5 +3,29 @@
   "noActiveTrip": "لا توجد رحلة نشطة",
   "noActiveTripHint": "ابدأ رحلة عندما تريد أن يعرف أحدهم أنك بخير.",
   "startTrip": "ابدأ رحلة",
-  "imOkay": "أنا بخير"
+  "imOkay": "أنا بخير",
+  "auth": {
+    "back": "رجوع",
+    "toggleTheme": "تبديل المظهر",
+    "switchLanguage": "تغيير اللغة",
+    "english": "English",
+    "arabic": "العربية",
+    "titlePrefix": "بداية مطمئنة مع ",
+    "titleBrand": "طمّن.",
+    "subtitle": "تابع باستخدام Google أو Facebook أو رقم هاتفك.",
+    "continueWithGoogle": "المتابعة باستخدام Google",
+    "continueWithFacebook": "المتابعة باستخدام Facebook",
+    "continueWithPhone": "المتابعة برقم الهاتف",
+    "or": "أو",
+    "privacy": "لا يظهر رقم هاتفك في رابط الرحلة.",
+    "retry": "إعادة المحاولة",
+    "notWiredYet": "تسجيل الدخول غير مربوط بعد — معاينة واجهة فقط.",
+    "errorGeneric": "حدث خطأ ما. حاول مرة أخرى.",
+    "welcomeBack": "أهلاً بك!",
+    "phoneTitle": "المتابعة برقم الهاتف",
+    "phoneHint": "سنرسل رمزاً للتحقق من رقمك.",
+    "phonePlaceholder": "5x xxx xxxx",
+    "phoneContinue": "متابعة",
+    "phoneComingSoon": "تسجيل الدخول بالهاتف واجهة فقط حالياً."
+  }
 }
