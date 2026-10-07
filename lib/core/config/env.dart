@@ -8,6 +8,10 @@ const String googleWebClientIdFromDefine = String.fromEnvironment(
   'GOOGLE_WEB_CLIENT_ID',
 );
 
+const String oauthRedirectUrlFromDefine = String.fromEnvironment(
+  'OAUTH_REDIRECT_URL',
+);
+
 String resolveEnv(String name, String fromDefine) {
   if (fromDefine.isNotEmpty) return fromDefine;
   final fromDotenv = dotenv.env[name];

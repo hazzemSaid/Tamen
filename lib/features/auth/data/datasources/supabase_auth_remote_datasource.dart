@@ -1,5 +1,6 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:tamen/core/config/env.dart';
 
 import '../models/user_model.dart';
 
@@ -23,13 +24,19 @@ class SupabaseAuthRemoteDataSource implements AuthRemoteDataSource {
     this._client, {
     GoogleSignIn? googleSignIn,
     String? googleServerClientId,
-  }) : _googleSignIn = googleSignIn ??
-            GoogleSignIn(
-              scopes: const <String>['email', 'profile'],
-              serverClientId: googleServerClientId,
-            );
+  }) : _googleSignIn =
+           googleSignIn ??
+           GoogleSignIn(
+             scopes: const <String>['email', 'profile'],
+             serverClientId: googleServerClientId,
+           );
 
-  static const String oauthRedirectUrl = 'tamen://oauth-callback';
+  static final String oauthRedirectUrl =
+      resolveEnvOrNull(
+        'OAUTH_REDIRECT_URL',
+        oauthRedirectUrlFromDefine,
+      ) ??
+      'tamen://oauth-callback';
 
   final SupabaseClient _client;
   final GoogleSignIn _googleSignIn;
