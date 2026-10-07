@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../theme/app_theme_controller.dart';
@@ -14,13 +15,7 @@ import '../../features/auth/presentation/cubit/auth_cubit.dart';
 
 final sl = GetIt.instance;
 
-/// Registers core singletons + the auth feature graph.
-///
-/// Requires a [SupabaseClient] (registered in `main`) unless an
-/// [AuthRepository] is already registered — tests bind a fake repository to
-/// exercise the auth UI without touching the backend.
-Future<void> initInjection() async {
-  // Idempotent so widget tests and app entry can both call it safely.
+Future<void> initInjection({String? googleServerClientId}) async {
   if (sl.isRegistered<AppThemeController>()) return;
 
   if (!sl.isRegistered<AuthRepository>()) {
@@ -30,8 +25,18 @@ Future<void> initInjection() async {
         'Call Supabase.initialize() first, or pre-register an AuthRepository.',
       );
     }
+    if (!sl.isRegistered<GoogleSignIn>()) {
+      sl.registerLazySingleton<GoogleSignIn>(
+        () => GoogleSignIn(
+          scopes: const <String>['email', 'profile'],
+          serverClientId: googleServerClientId?.isNotEmpty == true
+              ? googleServerClientId
+              : null,
+        ),
+      );
+    }
     sl.registerLazySingleton<AuthRemoteDataSource>(
-      () => SupabaseAuthRemoteDataSource(sl()),
+      () => SupabaseAuthRemoteDataSource(sl(), googleSignIn: sl()),
     );
     sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
   }
