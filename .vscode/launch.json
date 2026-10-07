@@ -1,6 +1,4 @@
 {
-  // F5 runs `flutter run` with --dart-define keys (never hardcoded/committed).
-  // Supabase Auth is used directly via supabase_flutter (no third-party identity provider).
   "version": "0.2.0",
   "configurations": [
     {
@@ -10,7 +8,8 @@
       "program": "lib/main.dart",
       "args": [
         "--dart-define=SUPABASE_URL=${input:supabaseUrl}",
-        "--dart-define=SUPABASE_KEY=${input:supabaseKey}"
+        "--dart-define=SUPABASE_KEY=${input:supabaseKey}",
+        "--dart-define=GOOGLE_WEB_CLIENT_ID=${input:googleWebClientId}"
       ]
     },
     {
@@ -31,6 +30,11 @@
       "type": "promptString",
       "description": "Supabase publishable key (sb_publishable_…)",
       "password": true
+    },
+    {
+      "id": "googleWebClientId",
+      "type": "promptString",
+      "description": "Google Web client ID (…apps.googleusercontent.com, for serverClientId)"
     }
   ]
 }
