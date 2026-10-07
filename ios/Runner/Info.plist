@@ -5,7 +5,7 @@
 		<!-- app_links v7 requires Flutter's built-in deep-link handling to be off
 	     (Flutter 3.24+) so the plugin receives openURLContexts: /
 	     continueUserActivity: from the SceneDelegate. Required for the
-	     tamen://trip/<token> deep link and the Clerk tamen://oauth-callback. -->
+	     tamen://trip/<token> deep link and the Supabase Auth tamen://oauth-callback. -->
 		<key>FlutterDeepLinkingEnabled</key>
 		<false/>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
@@ -81,7 +81,7 @@
 		<key>NSLocationAlwaysUsageDescription</key>
 		<string>Background location is used only while a trip is active to update your trip status. Sharing ends automatically when the trip ends.</string>
 		<!-- Custom URL scheme: tamen://trip/<token>, tamen://oauth-callback
-	     (app_links + go_router + Clerk). -->
+	     (app_links + go_router + Supabase Auth). -->
 		<key>CFBundleURLTypes</key>
 		<array>
 			<dict>

@@ -48,7 +48,17 @@ app.*.map.json
 .widget_preview/
 
 docs
+!docs/
+docs/*
+!docs/supabase-mvp-schema.md
+!docs/supabase-mvp-schema.sql
 .vscode/settings.json
 .specify
 .opencode
 .commandcode
+.env
+/docs
+/test
+.vscode/launch.json
+.vscode/launch.json
+/.vscode

@@ -1,6 +1,4 @@
 {
-  // F5 runs `flutter run` with --dart-define keys (never hardcoded/committed).
-  // See docs/supabase-clerk-setup.md §3.
   "version": "0.2.0",
   "configurations": [
     {
@@ -11,7 +9,7 @@
       "args": [
         "--dart-define=SUPABASE_URL=${input:supabaseUrl}",
         "--dart-define=SUPABASE_KEY=${input:supabaseKey}",
-        "--dart-define=CLERK_PUBLISHABLE_KEY=${input:clerkKey}"
+        "--dart-define=GOOGLE_WEB_CLIENT_ID=${input:googleWebClientId}"
       ]
     },
     {
@@ -34,10 +32,9 @@
       "password": true
     },
     {
-      "id": "clerkKey",
+      "id": "googleWebClientId",
       "type": "promptString",
-      "description": "Clerk publishable key (pk_test_… / pk_live_…)",
-      "password": true
+      "description": "Google Web client ID (…apps.googleusercontent.com, for serverClientId)"
     }
   ]
 }

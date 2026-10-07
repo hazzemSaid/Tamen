@@ -2,7 +2,7 @@
 <!--
   Excludes flutter_secure_storage's Keystore-wrapped preferences from auto-backup
   (Android < 12). Restoring a Google Drive backup across devices breaks the RSA-OAEP
-  key wrapper and the Clerk JWT becomes unreadable.
+  key wrapper and the Supabase Auth session becomes unreadable.
   See docs/flutter_secure_storage > "Disabling Auto Backup".
 -->
 <full-backup-content>

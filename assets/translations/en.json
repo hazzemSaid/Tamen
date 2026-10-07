@@ -3,5 +3,30 @@
   "noActiveTrip": "No active trip",
   "noActiveTripHint": "Start a trip when you need someone to know you're okay.",
   "startTrip": "Start a trip",
-  "imOkay": "I'm okay"
+  "imOkay": "I'm okay",
+  "auth": {
+    "back": "Back",
+    "toggleTheme": "Toggle theme",
+    "switchLanguage": "Switch language",
+    "english": "English",
+    "arabic": "العربية",
+    "titlePrefix": "A reassuring start with ",
+    "titleBrand": "Tamen.",
+    "subtitle": "Continue with Google, Facebook, or your phone number.",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithFacebook": "Continue with Facebook",
+    "continueWithPhone": "Continue with phone number",
+    "or": "or",
+    "privacy": "Your phone number never appears in the trip link.",
+    "retry": "Retry",
+    "notWiredYet": "Sign-in is not wired yet — UI preview only.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "cancelled": "Sign-in was cancelled.",
+    "welcomeBack": "Welcome!",
+    "phoneTitle": "Continue with phone",
+    "phoneHint": "We will send a code to verify your number.",
+    "phonePlaceholder": "5x xxx xxxx",
+    "phoneContinue": "Continue",
+    "phoneComingSoon": "Phone sign-in is UI-only for now."
+  }
 }
