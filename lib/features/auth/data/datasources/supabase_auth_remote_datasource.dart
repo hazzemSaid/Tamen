@@ -1,9 +1,8 @@
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/user_model.dart';
 
-/// Remote auth contract implemented by [SupabaseAuthRemoteDataSource].
-/// Presentation talks to the domain repository, never to this directly.
 abstract class AuthRemoteDataSource {
   Future<UserModel> signInWithGoogle();
   Future<void> signInWithFacebook();
@@ -12,23 +11,54 @@ abstract class AuthRemoteDataSource {
   Stream<UserModel?> authStateChanges();
 }
 
-/// Real Supabase-backed auth.
-///
-/// Facebook OAuth launches the provider's web flow; supabase_flutter observes
-/// the [oauthRedirectUrl] deep link, exchanges the returned code for a session,
-/// and emits it on [SupabaseClient.auth.onAuthStateChange] — which the
-/// `AuthCubit` listens to. The launch call itself does not resolve a user.
-class SupabaseAuthRemoteDataSource implements AuthRemoteDataSource {
-  SupabaseAuthRemoteDataSource(this._client);
+class GoogleSignInCancelled implements Exception {
+  const GoogleSignInCancelled();
 
-  /// Custom scheme registered in `AndroidManifest.xml` and `Info.plist`.
+  @override
+  String toString() => 'GoogleSignInCancelled()';
+}
+
+class SupabaseAuthRemoteDataSource implements AuthRemoteDataSource {
+  SupabaseAuthRemoteDataSource(
+    this._client, {
+    GoogleSignIn? googleSignIn,
+    String? googleServerClientId,
+  }) : _googleSignIn = googleSignIn ??
+            GoogleSignIn(
+              scopes: const <String>['email', 'profile'],
+              serverClientId: googleServerClientId,
+            );
+
   static const String oauthRedirectUrl = 'tamen://oauth-callback';
 
   final SupabaseClient _client;
+  final GoogleSignIn _googleSignIn;
 
   @override
-  Future<UserModel> signInWithGoogle() =>
-      Future.error(UnimplementedError('Google sign-in not wired yet'));
+  Future<UserModel> signInWithGoogle() async {
+    final account = await _googleSignIn.signIn();
+    if (account == null) throw const GoogleSignInCancelled();
+
+    final googleAuth = await account.authentication;
+    final idToken = googleAuth.idToken;
+    if (idToken == null || idToken.isEmpty) {
+      throw StateError(
+        'Google sign-in returned no idToken. '
+        'Check GOOGLE_WEB_CLIENT_ID and the Android SHA-1 registration.',
+      );
+    }
+
+    final response = await _client.auth.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: googleAuth.accessToken,
+    );
+    final user = response.user ?? _client.auth.currentUser;
+    if (user == null) {
+      throw StateError('Google sign-in failed: no Supabase session created.');
+    }
+    return UserModel.fromSupabaseUser(user);
+  }
 
   @override
   Future<void> signInWithFacebook() async {
@@ -48,7 +78,13 @@ class SupabaseAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> signOut() => _client.auth.signOut();
+  Future<void> signOut() async {
+    try {
+      await _googleSignIn.signOut();
+    } finally {
+      await _client.auth.signOut();
+    }
+  }
 
   @override
   Stream<UserModel?> authStateChanges() =>

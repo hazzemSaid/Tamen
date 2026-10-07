@@ -12,9 +12,6 @@ import '../../domain/usecases/sign_out.dart';
 import '../../domain/usecases/start_phone_sign_in.dart';
 import 'auth_state.dart';
 
-/// Drives the welcome screen via `Either<Failure, T>` usecases:
-/// `Right` navigates / restores session, `Left(Failure)` becomes
-/// [AuthFailure] so the banner can render it.
 class AuthCubit extends Cubit<AuthState> {
   final SignInWithGoogleUseCase signInWithGoogle;
   final SignInWithFacebookUseCase signInWithFacebook;
@@ -45,8 +42,9 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await signInWithGoogle();
     if (isClosed) return;
     result.fold(
-      (failure) =>
-          emit(AuthFailure(failure, provider: AuthProvider.google)),
+      (failure) => failure.code == 'cancelled'
+          ? emit(const AuthInitial())
+          : emit(AuthFailure(failure, provider: AuthProvider.google)),
       (user) => emit(AuthAuthenticated(user)),
     );
   }
@@ -70,8 +68,6 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  /// Phone is UI-only: success performs no state change (presentation
-  /// opens the phone sheet); validation failures surface as [AuthFailure].
   Future<void> continueWithPhone(String phoneNumber) async {
     final result = await startPhoneSignIn(phoneNumber);
     if (isClosed) return;
@@ -156,14 +152,8 @@ class AuthCubit extends Cubit<AuthState> {
 
   @override
   Future<void> close() async {
-    // ignore: avoid_print
-    print('CLOSE: begin sub=${_authSubscription != null}');
     _lifecycleListener?.dispose();
     await _authSubscription?.cancel();
-    // ignore: avoid_print
-    print('CLOSE: subscription cancelled');
     await super.close();
-    // ignore: avoid_print
-    print('CLOSE: super closed');
   }
 }

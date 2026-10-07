@@ -5,11 +5,6 @@ import 'package:tamen/features/auth/data/datasources/supabase_auth_remote_dataso
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 
-/// Thin mapper over [AuthRemoteDataSource]. Phone is intentionally UI-only:
-/// no backend call, just a validated no-op until the OTP slice lands.
-///
-/// Data sources throw; this layer catches and converts to
-/// `Left(Failure)` so domain callers only deal with [Either].
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remote;
 
@@ -40,7 +35,6 @@ class AuthRepositoryImpl implements AuthRepository {
     if (phoneNumber.isEmpty) {
       return const Left(AuthFailure('Phone number must not be empty'));
     }
-    // UI-only: navigation to the phone sheet is handled in presentation.
     return const Right(null);
   }
 
@@ -69,6 +63,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
   Failure _toFailure(Object error) {
     if (error is Failure) return error;
+    if (error is GoogleSignInCancelled) {
+      return const AuthFailure('auth.cancelled', code: 'cancelled');
+    }
     if (error is UnimplementedError) {
       return AuthFailure(error.message ?? 'auth.errorGeneric');
     }
