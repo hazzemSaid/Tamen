@@ -13,7 +13,7 @@ import 'package:tamen/core/theme/app_theme_controller.dart';
 import 'package:tamen/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:tamen/features/auth/presentation/cubit/auth_state.dart';
 import 'package:tamen/features/auth/presentation/screens/auth_welcome_screen.dart';
-import 'package:tamen/presentation/home/pages/home_page.dart';
+import 'package:tamen/features/home/presentation/pages/home_page.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +37,7 @@ Future<void> main() async {
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: AppConstants.translationsPath,
+      startLocale: const Locale(AppConstants.defaultLocaleCode),
       fallbackLocale: const Locale(AppConstants.defaultLocaleCode),
       child: const TamenApp(),
     ),
@@ -59,6 +60,7 @@ class TamenApp extends StatelessWidget {
             title: AppConstants.appName,
             theme: TamenTheme.light,
             darkTheme: TamenTheme.dark,
+            debugShowCheckedModeBanner: false,
             themeMode: mode,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,

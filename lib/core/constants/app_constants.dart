@@ -8,5 +8,5 @@ class AppConstants {
   static const List<String> supportedLanguageCodes = ['en', 'ar'];
 
   // easy_localization keys are namespaced per feature (`auth.*`, ...).
-  static const String defaultLocaleCode = 'en';
+  static const String defaultLocaleCode = 'ar';
 }

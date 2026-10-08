@@ -71,4 +71,65 @@ class AppConstraints {
   static const double privacyTopPadding = 28;
   static const double privacySpacing = 12;
   static const double privacyIconSize = 18;
+
+  // Home screen (Figma "Home 390x797" frame).
+  static const double greetingSize = 22;
+  static const double greetingHeight = 33 / 22;
+  static const double homeCardTitleSize = 20;
+  static const double homeCardTitleHeight = 26 / 20;
+  static const double homeBodySize = 14;
+  static const double homeBodyHeight = 24 / 14;
+  static const double homeMetaSize = 13;
+  static const double homeMetaHeight = 20 / 13;
+  static const double homeCaptionSize = 12;
+  static const double homeCaptionHeight = 18 / 12;
+  static const double homeTabSize = 11;
+  static const double homeTabHeight = 16 / 11;
+
+  static const double homeCardRadius = 24;
+  static const double homeCardPadding = 24;
+  static const double homeCardTopPadding = 32;
+  static const double homeHeroIconSize = 64;
+  static const double homeHeroGlyphSize = 26;
+  static const double homeAvatarSize = 36;
+  static const double homeAvatarGlyphSize = 16;
+  static const double homeStatusIconSize = 12;
+  static const double homeMetaIconSize = 15;
+  static const double homePulseHaloSize = 14;
+  static const double homeActiveDotSize = 8;
+  static const double homeTabDotSize = 4;
+  static const double homeProgressHeight = 6;
+  static const double homeDividerWidth = 1.2;
+
+  static const double homeGreetingTopPadding = 16;
+  static const double homeHeroTopPadding = 20;
+  static const double homeSectionTopPadding = 32;
+  static const double homeSectionLabelBottomPadding = 4;
+  static const double homeCardInnerSpacing = 20;
+  static const double homeCardBodySpacing = 8;
+  static const double homeHeroTitleGap = 28;
+  static const double homeDividerGap = 16;
+  static const double homeFeedbackPadding = 48;
+  static const double homeStatusGap = 4;
+  static const double homeMetaRowSpacing = 6;
+  static const double homeMetaIconTextGap = 8;
+  static const double homeRecentTileGap = 12;
+  static const double homeRecentTileMinHeight = 60;
+  static const double homeTileVerticalPadding = 12;
+  static const double homeTileTitleHeight = 22 / 15;
+  static const double homeTileMetaGap = 2;
+  static const double homeNavBarTopPadding = 8;
+  static const double homeNavItemGap = 4;
+  static const double homeNavItemPadding = 4;
+  static const double homeBadgeHorizontalPadding = 10;
+  static const double homeBadgeVerticalPadding = 4;
+  static const double pillRadius = 999;
+  // Text-only header wordmark: طمّن (ar) / tamen. (en).
+  static const double brandWordmarkSize = 22;
+  static const double brandWordmarkHeightFactor = 28 / 22;
+  static const double brandWordmarkWidth = 112;
+  static const double brandWordmarkHeight = 32;
+
+  static const EdgeInsetsDirectional homeScrollPadding =
+      EdgeInsetsDirectional.only(top: 8, bottom: 16);
 }

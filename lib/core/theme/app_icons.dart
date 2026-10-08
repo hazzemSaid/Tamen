@@ -55,6 +55,10 @@ class TamenIcons {
   static const FaIconData sun = FontAwesomeIcons.sun;
   static const FaIconData shieldCheck = FontAwesomeIcons.shieldHalved;
 
+  // Bottom navigation (single source — no Material Icons in features).
+  static const FaIconData home = FontAwesomeIcons.house;
+  static const FaIconData account = FontAwesomeIcons.user;
+
   // Directional — mirror in RTL via [directional] / [back] / [forward].
   // Do NOT mirror [location], [ok], [warn], [shield] (§25).
   static const FaIconData arrowRight = FontAwesomeIcons.arrowRight;
